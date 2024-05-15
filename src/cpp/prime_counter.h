@@ -1,13 +1,15 @@
-#include <stdio.h>
-
 #ifndef PRIME_COUNTER_H
 #define PRIME_COUNTER_H
 
-#define RUNS 4
-#define AMOUNT 40000
+#include <stdio.h>
 
-//#define NOT_DEBUGGING
+#define RUNS 3
+#ifndef AMOUNT
+#define AMOUNT 20000
+#endif
+
 int primes[AMOUNT];
+
 
 int counter(void) {
     int found = 0;

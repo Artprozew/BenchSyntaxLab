@@ -2,6 +2,7 @@
 #include <cstdio>
 #include "prime_counter.h"
 
+
 int main() {
     clock_t tests[RUNS];
     int array_size = 0;

@@ -3,22 +3,40 @@ CFLAGS=-Isrc/c
 CPP=g++
 CPPFLAGS=-Wall -g -Isrc/cpp
 
-all: c cpp
+.PHONY: clean
 
-c: tests/c/test_prime_counter.c src/c/prime_counter.c src/c/prime_counter.h
-	$(CC) $(CFLAGS) -o $@ $< src/c/prime_counter.c
+c: src/c/prime_counter.c build
+	$(CC) $(CFLAGS) -o build/$@ $<
 
-cpp: src/cpp/prime_counter.cpp
-	$(CPP) $(CPPFLAGS) -o $@ $^
+c_run: c
+	./build/c.exe
 
-cpp_test: tests/cpp/test_prime_counter.cpp src/cpp/prime_counter.h
-	$(CPP) $(CPPFLAGS) -o $@ $^
+cpp: src/cpp/prime_counter.cpp build
+	$(CPP) $(CPPFLAGS) -o build/$@ $<
 
-cython: src/cython/cython_test_call.py
-	cd src/cython/ && py setup.py build_ext --inplace && py .\cython_test_call.py
-	
-cython_run: src/cython/cython_test_call.py
-	cd src/cython/ && py .\cython_test_call.py
+cpp_run: cpp
+	./build/cpp.exe
+
+cpp_test: tests/cpp/test_prime_counter.cpp src/cpp/prime_counter.h build
+	$(CPP) $(CPPFLAGS) -o build/$@ $< src/cpp/prime_counter.h -DAMOUNT=200
+
+cython: src/cython/cython_prime_counter.py
+	cd src/cython/ && py setup.py build_ext --inplace && py .\cython_prime_counter.py
+
+cython_run: src/cython/cython_prime_counter.py
+	cd src/cython/ && py .\cython_prime_counter.py
+
+cython_test: tests\cython\test_prime_counter.py
+	py -m unittest $<
+
+python: src/python/prime_counter.py
+	py $<
+
+python_test: tests\python\test_prime_counter.py
+	py -m unittest $<
+
+build:
+	@mkdir $@>NUL
 
 clean:
 	rd /s */output && rd /s */build
