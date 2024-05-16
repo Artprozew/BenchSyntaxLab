@@ -19,8 +19,8 @@ def test(amount):
 
 def main():
     tests = []
-    runs = 4
-    amount = 10000
+    runs = 3
+    amount = 20000
 
     for run in range(runs):
         timer = time.perf_counter()

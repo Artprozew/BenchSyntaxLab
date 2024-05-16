@@ -6,7 +6,7 @@
 
 #define RUNS 3
 #ifndef AMOUNT
-#define AMOUNT 20000
+    #define AMOUNT 20000
 #endif
 
 int primes[AMOUNT];

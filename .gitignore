@@ -43,6 +43,7 @@
 *.idb
 *.pdb
 
+# Python
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -54,6 +55,11 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+eggs/
+develop-eggs/
+*.egg-info/
+*.egg
+bin/
 
 # Unit test / coverage reports
 .pytest_cache/
@@ -75,3 +81,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# Cython C build file
+cython/*.c

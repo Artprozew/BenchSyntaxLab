@@ -1,0 +1,9 @@
+[build-system]
+requires = ["setuptools", "wheel", "Cython"]
+
+[project]
+name = "langbench"
+version = "0.0.1"
+authors = [{name = "Arthur Carvalho", email = "arthurbcarvalho@gmail.com"}]
+readme = "README.md"
+requires-python = "<=3.11" # not sure
