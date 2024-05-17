@@ -1,40 +1,46 @@
 import time
+from typing import Final
 
-def test(amount):
-    primes = []
-    found = 0
-    number = 2
+RUNS: Final[int] = 3
+AMOUNT: int = 20000 # Not really constant because the test module may modify it?
+PRIME_AMOUNT: Final[bool] = True
 
-    while found < amount:
+
+def prime_counter() -> list[int]:
+    primes: list[int] = []
+    primes_found: int = 0
+    number: int = 2
+
+    while (primes_found if PRIME_AMOUNT else number) < AMOUNT:
         for i in primes:
             if number % i == 0:
                 break
         else:
             primes.append(number)
-            found += 1
+            primes_found += 1
 
         number += 1
 
     return primes
 
-def main():
-    tests = []
-    runs = 3
-    amount = 20000
 
-    for run in range(runs):
-        timer = time.perf_counter()
-        test(amount)
-        timer = time.perf_counter()  - timer
-        tests.append(timer)
+def main() -> None:
+    print("Prime Counting Benchmark")
+    total_time: int = 0
+    primes: list[int] = []
 
-    total = 0
-    for run in tests:
-        total += run
-        print(f"Runs in: {run:.3f} seconds")
+    for run in range(RUNS):
+        interval: float = time.perf_counter()
+        primes = prime_counter()
+        interval = time.perf_counter() - interval
+        total_time += interval
+        print(f"- Test {run + 1} ran in: {interval:.3f} seconds")
 
-    avg = total / len(tests)
-    print(f"Took: {runs} tests. Average: {avg:.3f} seconds")
+    print(f"\nCounted {len(primes)}"
+    f"{'' if PRIME_AMOUNT else f' up to {AMOUNT}'}"
+    f" in {RUNS} with an average of {(total_time/ RUNS):.3f} seconds"
+    )
+
 
 if __name__ == "__main__":
     main()

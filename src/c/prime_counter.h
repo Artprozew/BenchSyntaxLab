@@ -1,25 +1,29 @@
 #ifndef PRIME_COUNTER_H
 #define PRIME_COUNTER_H
 
-#include <stdio.h>
 #include <stdbool.h>
 
-#define RUNS 3
+#ifndef RUNS
+    #define RUNS 3
+#endif
 #ifndef AMOUNT
-    #define AMOUNT 20000
+    #define AMOUNT 0
+#endif
+#ifndef PRIME_AMOUNT
+    #define PRIME_AMOUNT true
 #endif
 
 int primes[AMOUNT];
 
 
-int counter(void) {
-    int found = 0;
-    int number = 2;
-    int array_size = 0;
+int prime_counter(void) {
+    unsigned int primes_found = 0, number = 2;
+    primes[0] = 2;
 
-    while (found < AMOUNT) {
+    while (((PRIME_AMOUNT) ? primes_found : number) < AMOUNT) {
         bool flag_break = false;
-        for (int i = 0; i < array_size; i++) {
+        
+        for (unsigned i = 0; i < primes_found; i++) {
             if (number % primes[i] == 0) {
                 flag_break = true;
                 break;
@@ -27,16 +31,13 @@ int counter(void) {
         }
 
         if (!flag_break) {
-            primes[found] = number;
-            found++;
-            array_size++;
-            flag_break = false;
+            primes[primes_found++] = number;
         }
 
         number++;
     }
     
-    return array_size;
+    return primes_found;
 }
 
 #endif

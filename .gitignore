@@ -83,4 +83,4 @@ dmypy.json
 cython_debug/
 
 # Cython C build file
-cython/*.c
+src/cython/*.c

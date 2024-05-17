@@ -4,24 +4,23 @@
 
 
 int main() {
-    clock_t tests[RUNS];
-    int array_size = 0;
+    printf("Prime Counting Benchmark\n");
+    float total_time = 0;
+    unsigned int primes = 0;
 
-    for (int i = 0; i < RUNS; i++) {
-        clock_t timer = clock();
-        counter();
-        timer = clock() - timer;
-        tests[i] = timer;
-        array_size++;
+    for (unsigned int i = 0; i < RUNS; i++) {
+        clock_t interval = clock();
+        primes = prime_counter();
+        interval = clock() - interval;
+
+        float interval_seconds = (float) interval / CLOCKS_PER_SEC;
+        total_time += interval_seconds;
+        printf("- Test %d ran in: %.3f seconds\n", i + 1, interval_seconds);
     }
 
-    float total = 0;
-    for (int i = 0; i < RUNS; i++) {
-        total += (double)tests[i] / CLOCKS_PER_SEC;
-        printf("Runs in: %.3f seconds\n", (float)tests[i] / CLOCKS_PER_SEC);
-    }
-
-    double avg = total / array_size;
-    printf("Took: %d tests. Average: %.3f seconds", RUNS, avg);
+    printf(
+        "\nCounted %d primes in %d runs"
+        " with an average of %.3f seconds per run\n",
+        primes, RUNS, total_time / RUNS);
     return 0;
 }

@@ -2,46 +2,49 @@ import time
 
 DEF RUNS = 3
 DEF AMOUNT = 20000
+DEF PRIME_AMOUNT = False
 
-def test():
+
+def prime_counter() -> tuple[list[int], int]:
     cdef int[AMOUNT] primes
-    cdef int found = 0
-    cdef int number = 2
-    cdef int array_size = 0
+    cdef unsigned int number = 2
+    cdef unsigned int primes_found = 0
+    primes[0] = 2
 
-    while found < AMOUNT:
-        for i in range(array_size):
+    while (primes_found if PRIME_AMOUNT else number) < AMOUNT:
+        for i in range(primes_found):
             if number % primes[i] == 0:
                 break
-
         else:
-            primes[found] = number
-            array_size += 1
-            found += 1
+            primes[primes_found] = number
+            primes_found += 1
 
         number += 1
 
-    return primes
+    return primes, primes_found
 
-def main():
-    cdef float[3] tests
-    cdef float timer
-    cdef int array_size = 0
+
+def main() -> None:
+    if AMOUNT <= 0:
+        print("Amount must be greater than 0")
+        return
+    
+    print("Prime Counting Benchmark")
+    cdef float total_time = 0, interval
+    cdef int primes_found
 
     for run in range(RUNS):
-        timer = time.perf_counter()
-        test()
-        timer = time.perf_counter()  - timer
-        tests[array_size] = timer
-        array_size += 1
+        interval = time.perf_counter()
+        _, primes_found = prime_counter()
+        interval = time.perf_counter()  - interval
+        total_time += interval
+        print(f"- Test {run + 1} ran in: {interval:.3f} seconds")
 
-    cdef double total = 0
-    for run in tests:
-        total += run
-        print(f"Runs in: {run:.3f} seconds")
+    print(f"\nCounted {primes_found}"
+    f"{'' if PRIME_AMOUNT else f' up to {AMOUNT}'}"
+    f" in {RUNS} with an average of {(total_time/ RUNS):.3f} seconds"
+    )
 
-    cdef double avg = total / len(tests)
-    print(f"Took: {RUNS} tests. Average: {avg:.3f} seconds")
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Isrc/c
+CFLAGS=-Wall -g -Isrc/c
 
 CPP=g++
 CPPFLAGS=-Wall -g -Isrc/cpp
@@ -25,16 +25,22 @@ $(CFILE): $(SRCDIR)/$(CDIR)/prime_counter.c build
 c: $(CFILE)
 	./$(BINDIR)/$(CFILE)
 
+c_tests: $(TESTDIR)/$(CDIR)/test_prime_counter.c build
+	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $< $(SRCDIR)/$(CDIR)/prime_counter.h -DAMOUNT=400
+
+c_run_tests: c_tests
+	./$(BINDIR)/$<
+
 $(CPPFILE): $(SRCDIR)/$(CPPDIR)/prime_counter.cpp build
-	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $<
+	$(CC) $(CPPFLAGS) -o $(BINDIR)/$@ $<
 
 cpp: $(CPPFILE)
 	./$(BINDIR)/$(CPPFILE)
 
 cpp_tests: $(TESTDIR)/$(CPPDIR)/test_prime_counter.cpp build
-	$(CPP) $(CPPFLAGS) -o $(BINDIR)/$@ $< $(SRCDIR)/$(CPPDIR)/prime_counter.h -DAMOUNT=200
+	$(CPP) $(CPPFLAGS) -o $(BINDIR)/$@ $< $(SRCDIR)/$(CPPDIR)/prime_counter.h -DAMOUNT=400
 
-cpp_run_test: cpp_tests
+cpp_run_tests: cpp_tests
 	./$(BINDIR)/$<
 
 cython_build: $(SRCDIR)/$(CYTHONDIR)/cython_prime_counter.py
@@ -43,13 +49,13 @@ cython_build: $(SRCDIR)/$(CYTHONDIR)/cython_prime_counter.py
 cython: cython_build
 	cd $(SRCDIR)/$(CYTHONDIR)/ && py ./cython_prime_counter.py
 
-cython_test: $(TESTDIR)/$(CYTHONDIR)/test_prime_counter.py
+cython_tests: $(TESTDIR)/$(CYTHONDIR)/test_prime_counter.py cython_build
 	py -m unittest $<
 
 python: $(SRCDIR)/$(PYTHONDIR)/prime_counter.py
 	py $<
 
-python_test: $(TESTDIR)/$(PYTHONDIR)/test_prime_counter.py
+python_tests: $(TESTDIR)/$(PYTHONDIR)/test_prime_counter.py
 	py -m unittest $<
 
 build: # create bin folder, ignore stdout and stderr, exit code 0
