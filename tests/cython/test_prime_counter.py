@@ -26,3 +26,7 @@ class TestPrimeCounter(unittest.TestCase):
     def test_prime_counter_edge(self):
         primes, _ = cython_prime_counter.prime_counter()
         self.assertEqual(primes[0], 2)
+
+    def test_prime_counter_last(self):
+        primes, _ = cython_prime_counter.prime_counter()
+        self.assertEqual(primes[194:199], [1187, 1193, 1201, 1213, 1217])

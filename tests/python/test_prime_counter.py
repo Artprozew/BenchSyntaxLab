@@ -4,10 +4,18 @@ import unittest
 class TestPrimeCounter(unittest.TestCase):
 
     def setUp(self):
-        prime_counter.AMOUNT = 400 # Otherwise it would be really slow to test :)
+        """
+        Set up the test environment by setting the AMOUNT attribute to 400.
+        This is done to avoid a slow test when the AMOUNT is too large.
+        """
+        prime_counter.AMOUNT = 400
         self.test_prime_counter_amount()
 
     def test_prime_counter_amount(self):
+        """
+        Test the test environment to ensure that AMOUNT is at least 200
+        so it can continue to run the other tests (not really useful in this particular test).
+        """
         primes: list[int] = prime_counter.prime_counter()
         self.assertGreaterEqual(len(primes), 200, "Amount of primes must be at least 200 to test!")
 
@@ -26,4 +34,8 @@ class TestPrimeCounter(unittest.TestCase):
     def test_prime_counter_edge(self):
         primes: list[int] = prime_counter.prime_counter()
         self.assertEqual(primes[0], 2)
+
+    def test_prime_counter_last(self):
+        primes: list[int] = prime_counter.prime_counter()
+        self.assertEqual(primes[194:199], [1187, 1193, 1201, 1213, 1217])
 
