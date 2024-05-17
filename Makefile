@@ -18,7 +18,7 @@ test_dir = tests
 bin_dir = bin
 
 supress_out = >NUL 2>&1
-return_true = || @echo true
+return_true = || echo true
 supress_all = $(supress_out) $(return_true) $(supress_out)
 
 .PHONY: clean build
