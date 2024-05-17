@@ -1,0 +1,26 @@
+name: CI Tests
+
+on: [push, pull_request]
+
+jobs:
+  ci-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: install dependencies
+        uses: py-actions/py-dependency-install@v4
+        with:
+          path: "requirements.txt"
+        
+      - name: run tests
+        run: |
+          make c-tests
+          make cpp-tests
+          make cython-tests
+          make python-tests

@@ -1,65 +1,77 @@
-CC=gcc
-CFLAGS=-Wall -g -Isrc/c
+CC = gcc
+CFLAGS = -Wall -g
+ALL_CFLAGS = -I$(src_dir)/$(c_dir) $(CFLAGS)
 
-CPP=g++
-CPPFLAGS=-Wall -g -Isrc/cpp
+CPP = g++
+CPPFLAGS = -Wall -g
+ALL_CPPFLAGS = -I$(src_dir)/$(cpp_dir) $(CPPFLAGS)
 
-CFILE=c_prime_counter
-CPPFILE=cpp_prime_counter
+c_file = c-prime-counter
+cpp_file = cpp-prime-counter
 
-SRCDIR=src
-CDIR=c
-CPPDIR=cpp
-CYTHONDIR=cython
-PYTHONDIR=python
-TESTDIR=tests
-BINDIR=bin
+src_dir = src
+c_dir = c
+cpp_dir = cpp
+cython_dir = cython
+python_dir = python
+test_dir = tests
+bin_dir = bin
+
+supress_out = >NUL 2>&1
+return_true = || @echo true
+supress_all = $(supress_out) $(return_true) $(supress_out)
 
 .PHONY: clean build
 
 all: c cpp cython python
 
-$(CFILE): $(SRCDIR)/$(CDIR)/prime_counter.c build
-	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $<
+$(c_file): $(src_dir)/$(c_dir)/prime_counter.c build
+	$(CC) $(ALL_CFLAGS) -o $(bin_dir)/$@ $<
 
-c: $(CFILE)
-	./$(BINDIR)/$(CFILE)
+c: $(c_file)
+	$(bin_dir)/$(c_file)
 
-c_tests: $(TESTDIR)/$(CDIR)/test_prime_counter.c build
-	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $< $(SRCDIR)/$(CDIR)/prime_counter.h -DAMOUNT=400
+c-build-tests: $(test_dir)/$(c_dir)/test_prime_counter.c build
+	$(CC) $(ALL_CFLAGS) -o $(bin_dir)/$@ $< $(src_dir)/$(c_dir)/prime_counter.h -DAMOUNT=400
 
-c_run_tests: c_tests
-	./$(BINDIR)/$<
+c-tests: c-build-tests
+	$(bin_dir)/$<
 
-$(CPPFILE): $(SRCDIR)/$(CPPDIR)/prime_counter.cpp build
-	$(CC) $(CPPFLAGS) -o $(BINDIR)/$@ $<
+$(cpp_file): $(src_dir)/$(cpp_dir)/prime_counter.cpp build
+	$(CPP) $(ALL_CPPFLAGS) -o $(bin_dir)/$@ $<
 
-cpp: $(CPPFILE)
-	./$(BINDIR)/$(CPPFILE)
+cpp: $(cpp_file)
+	$(bin_dir)/$(cpp_file)
 
-cpp_tests: $(TESTDIR)/$(CPPDIR)/test_prime_counter.cpp build
-	$(CPP) $(CPPFLAGS) -o $(BINDIR)/$@ $< $(SRCDIR)/$(CPPDIR)/prime_counter.h -DAMOUNT=400
+cpp-build-tests: $(test_dir)/$(cpp_dir)/test_prime_counter.cpp build
+	$(CPP) $(ALL_CPPFLAGS) -o $(bin_dir)/$@ $< $(src_dir)/$(cpp_dir)/prime_counter.h -DAMOUNT=400
 
-cpp_run_tests: cpp_tests
-	./$(BINDIR)/$<
+cpp-tests: cpp-build-tests
+	$(bin_dir)/$<
 
-cython_build: $(SRCDIR)/$(CYTHONDIR)/cython_prime_counter.py
-	cd $(SRCDIR)/$(CYTHONDIR)/ && py setup.py build_ext --inplace
+cython-build: $(src_dir)/$(cython_dir)
+	cd $< && \
+	python setup.py build_ext --inplace
 
-cython: cython_build
-	cd $(SRCDIR)/$(CYTHONDIR)/ && py ./cython_prime_counter.py
+cython: $(src_dir)/$(cython_dir)/cython_prime_counter.py cython-build
+	python $<
 
-cython_tests: $(TESTDIR)/$(CYTHONDIR)/test_prime_counter.py cython_build
-	py -m unittest $<
+cython-tests: $(test_dir)/$(cython_dir)/test_prime_counter.py cython-build
+	python -m unittest $<
 
-python: $(SRCDIR)/$(PYTHONDIR)/prime_counter.py
-	py $<
+python: $(src_dir)/$(python_dir)/prime_counter.py
+	python $<
 
-python_tests: $(TESTDIR)/$(PYTHONDIR)/test_prime_counter.py
-	py -m unittest $<
+python-tests: $(test_dir)/$(python_dir)/test_prime_counter.py
+	python -m unittest $<
 
-build: # create bin folder, ignore stdout and stderr, exit code 0
-	@mkdir $(BINDIR)>NUL 2>&1 || @echo true >NUL
+build:
+	@mkdir $(bin_dir)$(supress_out) || @echo true$(supress_out)
 
-clean:
-	rmdir $(BINDIR)
+clean: # needs return_true so the other recipes will run, but also needs to cd every line
+	@rmdir "$(bin_dir)" /s /q $(supress_all)
+	@rmdir "$(src_dir)/$(cython_dir)/build" /s /q $(supress_all)
+	@cd $(src_dir)/$(cython_dir) && \
+	del /f /q *.pyd $(supress_all)
+	@cd $(src_dir)/$(cython_dir) && \
+	del /f /q *.c $(supress_all)
