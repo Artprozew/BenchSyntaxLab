@@ -66,12 +66,14 @@ python-tests: $(test_dir)/$(python_dir)/test_prime_counter.py
 	python -m unittest $<
 
 build:
-	@mkdir $(bin_dir)$(supress_out) || @echo true$(supress_out)
+	mkdir $(bin_dir)$(supress_all)
 
 clean: # needs return_true so the other recipes will run, but also needs to cd every line
-	@rmdir "$(bin_dir)" /s /q $(supress_all)
-	@rmdir "$(src_dir)/$(cython_dir)/build" /s /q $(supress_all)
-	@cd $(src_dir)/$(cython_dir) && \
+	rmdir "$(bin_dir)" /s /q $(supress_all)
+	rmdir "$(src_dir)/$(cython_dir)/build" /s /q $(supress_all)
+	cd $(src_dir)/$(cython_dir) && \
 	del /f /q *.pyd $(supress_all)
-	@cd $(src_dir)/$(cython_dir) && \
+	cd $(src_dir)/$(cython_dir) && \
 	del /f /q *.c $(supress_all)
+
+.SILENT: build clean
