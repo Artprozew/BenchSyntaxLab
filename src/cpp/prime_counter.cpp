@@ -4,6 +4,11 @@
 
 
 int main() {
+    if (AMOUNT <= 0 || RUNS <= 0) {
+        printf("AMOUNT or RUNS must be greater than 0!\n");
+        return 1;
+    }
+
     printf("Prime Counting Benchmark\n");
     float total_time = 0;
     unsigned int primes = 0;
@@ -18,9 +23,12 @@ int main() {
         printf("- Test %d ran in: %.3f seconds\n", i + 1, interval_seconds);
     }
 
+    char formatted_str[20];
+    snprintf(formatted_str, sizeof(formatted_str), "up to %d ", AMOUNT);
+
     printf(
-        "\nCounted %d primes in %d runs"
+        "\nCounted %d primes %sin %d runs"
         " with an average of %.3f seconds per run\n",
-        primes, RUNS, total_time / RUNS);
+        primes, PRIME_AMOUNT ? "" : formatted_str, RUNS, total_time / RUNS);
     return 0;
 }

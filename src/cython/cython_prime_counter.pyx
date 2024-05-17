@@ -2,7 +2,7 @@ import time
 
 DEF RUNS = 3
 DEF AMOUNT = 20000
-DEF PRIME_AMOUNT = False
+DEF PRIME_AMOUNT = True
 
 
 def prime_counter() -> tuple[list[int], int]:
@@ -25,8 +25,8 @@ def prime_counter() -> tuple[list[int], int]:
 
 
 def main() -> None:
-    if AMOUNT <= 0:
-        print("Amount must be greater than 0")
+    if AMOUNT <= 0 or RUNS <= 0:
+        print("AMOUNT or RUNS must be greater than 0!")
         return
     
     print("Prime Counting Benchmark")

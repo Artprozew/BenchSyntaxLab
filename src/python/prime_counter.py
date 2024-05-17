@@ -25,6 +25,10 @@ def prime_counter() -> list[int]:
 
 
 def main() -> None:
+    if AMOUNT <= 0 or RUNS <= 0:
+        print("AMOUNT or RUNS must be greater than 0!")
+        return
+    
     print("Prime Counting Benchmark")
     total_time: int = 0
     primes: list[int] = []

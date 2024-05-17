@@ -7,7 +7,7 @@
     #define RUNS 3
 #endif
 #ifndef AMOUNT
-    #define AMOUNT 0
+    #define AMOUNT 20000
 #endif
 #ifndef PRIME_AMOUNT
     #define PRIME_AMOUNT true

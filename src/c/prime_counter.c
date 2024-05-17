@@ -4,6 +4,11 @@
 
 
 int main() {
+    if (AMOUNT <= 0 || RUNS <= 0) {
+        printf("AMOUNT or RUNS must be greater than 0!\n");
+        return 1;
+    }
+    
     printf("Prime Counting Benchmark\n");
     float total_time = 0;
     unsigned int primes = 0;
