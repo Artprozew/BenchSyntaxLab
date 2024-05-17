@@ -32,7 +32,8 @@ c: $(c_file)
 	$(bin_dir)/$(c_file)
 
 c-build-tests: $(test_dir)/$(c_dir)/test_prime_counter.c build
-	$(CC) $(ALL_CFLAGS) -o $(bin_dir)/$@ $< $(src_dir)/$(c_dir)/prime_counter.h -DAMOUNT=400
+	$(CC) $(ALL_CFLAGS) -o $(bin_dir)/$@ $< $(src_dir)/$(c_dir)/prime_counter.h \
+	-DAMOUNT=400 -DPRIME_AMOUNT -DRUNS=3
 
 c-tests: c-build-tests
 	$(bin_dir)/$<
@@ -44,7 +45,8 @@ cpp: $(cpp_file)
 	$(bin_dir)/$(cpp_file)
 
 cpp-build-tests: $(test_dir)/$(cpp_dir)/test_prime_counter.cpp build
-	$(CPP) $(ALL_CPPFLAGS) -o $(bin_dir)/$@ $< $(src_dir)/$(cpp_dir)/prime_counter.h -DAMOUNT=400
+	$(CPP) $(ALL_CPPFLAGS) -o $(bin_dir)/$@ $< $(src_dir)/$(cpp_dir)/prime_counter.h \
+	-DAMOUNT=400 -DPRIME_AMOUNT -DRUNS=3
 
 cpp-tests: cpp-build-tests
 	$(bin_dir)/$<
