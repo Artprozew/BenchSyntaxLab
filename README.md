@@ -9,8 +9,6 @@ Not only can you compare the performance of these languages, but you’re also e
 
 I've been trying to maintain a similar structure for each code while still taking advantage of their unique features, and also ensuring that they will deliver optimal performance in each specific scenario.
 
----
-
 ## Table of Contents
 
 - [BenchSyntaxLab](#benchsyntaxlab)
@@ -24,8 +22,6 @@ I've been trying to maintain a similar structure for each code while still takin
   - [Contributing](#contributing)
     - [Code Styling](#code-styling)
   - [Licensing](#licensing)
-
----
 
 ## Benchmarks
 
@@ -45,8 +41,6 @@ Test by getting 20,000 primes in 10 runs, using the same code structure and algo
 | Cython        | 0.827s           | MSVC /O2       |
 | Python        | 10.790s          | CPython 3.11.3 |
 
----
-
 ## Compiling and Running
 
 You will need:
@@ -62,8 +56,6 @@ You will need:
 Don't forget to set your [PATH](https://superuser.com/questions/284342/what-are-path-and-other-environment-variables-and-how-can-i-set-or-use-them) environment variables accordingly (if needed).
 
 ### Quick Setup
-
-The quick setup you need to get up and running.
 
 These commands will clone the project repository, install the required Python dependencies and build/run the project.
 

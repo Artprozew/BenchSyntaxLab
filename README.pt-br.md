@@ -9,8 +9,6 @@ Você não apenas pode comparar a performance dessas linguagens, mas também é 
 
 Tenho tentado manter uma estrutura similar para cada código ao mesmo tempo em que aproveito seus recursos únicos, e também garantindo que eles irão entregar o desempenho ideal para cada cenário específico.
 
----
-
 ## Índice
 
 - [BenchSyntaxLab](#benchsyntaxlab)
@@ -24,8 +22,6 @@ Tenho tentado manter uma estrutura similar para cada código ao mesmo tempo em q
   - [Contribuindo](#contribuindo)
     - [Estilo de Código](#estilo-de-código)
   - [Licença](#licença)
-
----
 
 ## Benchmarks
 
@@ -45,8 +41,6 @@ Teste obtendo 20.000 números primos em 10 execuções, usando a mesma estrutura
 | Cython        | 0.827s           | MSVC /O2       |
 | Python        | 10.790s          | CPython 3.11.3 |
 
----
-
 ## Compilando e Executando
 
 Você irá precisar:
@@ -62,8 +56,6 @@ Você irá precisar:
 Não se esqueça de definir suas variáveis de ambiente [PATH](https://superuser.com/questions/284342/what-are-path-and-other-environment-variables-and-how-can-i-set-or-use-them) adequadamente (se necessário).
 
 ### Configuração Rápida
-
-Como começar em poucos passos.
 
 Esses comandos irão clonar o repositório do projeto, instalar as dependências Python necessárias e compilar/executar o projeto.
 
