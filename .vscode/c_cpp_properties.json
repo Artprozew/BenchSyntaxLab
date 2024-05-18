@@ -3,13 +3,12 @@
         {
             "name": "windows-gcc-x86",
             "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/src/c"
+                "${workspaceFolder}/src/c",
+                "${workspaceFolder}/src/cpp"
             ],
-            "compilerPath": "D:\\Programas\\MinGW\\bin\\g++.exe",
             "cStandard": "${default}",
             "cppStandard": "${default}",
-            "intelliSenseMode": "windows-gcc-x86",
+            "intelliSenseMode": "${default}",
             "compilerArgs": [
                 ""
             ]
