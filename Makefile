@@ -1,10 +1,12 @@
 CC = gcc
 CFLAGS = -Wall -g
 ALL_CFLAGS = -I$(src_dir)/$(c_dir) $(CFLAGS)
+TESTS_CFLAGS = -DAMOUNT=400 -DPRIME_AMOUNT -DRUNS=3
 
 CPP = g++
 CPPFLAGS = -Wall -g
 ALL_CPPFLAGS = -I$(src_dir)/$(cpp_dir) $(CPPFLAGS)
+TESTS_CPPFLAGS = -DAMOUNT=400 -DPRIME_AMOUNT -DRUNS=3
 
 c_file = c-prime-counter
 cpp_file = cpp-prime-counter
@@ -32,8 +34,8 @@ c: $(c_file)
 	$(bin_dir)/$(c_file)
 
 c-build-tests: $(test_dir)/$(c_dir)/test_prime_counter.c build
-	$(CC) $(ALL_CFLAGS) -o $(bin_dir)/$@ $< $(src_dir)/$(c_dir)/prime_counter.h \
-	-DAMOUNT=400 -DPRIME_AMOUNT -DRUNS=3
+	$(CC) $(ALL_CFLAGS) $(TESTS_CFLAGS) \
+	-o $(bin_dir)/$@ $< $(src_dir)/$(c_dir)/prime_counter.h
 
 c-tests: c-build-tests
 	$(bin_dir)/$<
@@ -45,8 +47,8 @@ cpp: $(cpp_file)
 	$(bin_dir)/$(cpp_file)
 
 cpp-build-tests: $(test_dir)/$(cpp_dir)/test_prime_counter.cpp build
-	$(CPP) $(ALL_CPPFLAGS) -o $(bin_dir)/$@ $< $(src_dir)/$(cpp_dir)/prime_counter.h \
-	-DAMOUNT=400 -DPRIME_AMOUNT -DRUNS=3
+	$(CPP) $(ALL_CPPFLAGS) $(TESTS_CPPFLAGS) \
+	-o $(bin_dir)/$@ $< $(src_dir)/$(cpp_dir)/prime_counter.h
 
 cpp-tests: cpp-build-tests
 	$(bin_dir)/$<
