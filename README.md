@@ -1,7 +1,10 @@
 # BenchSyntaxLab
 
-[![pt-br](https://img.shields.io/badge/lang-pt--br-green
-)](https://github.com/Artprozew/BenchSyntaxLab/blob/main/README.pt-br.md)
+![GitHub language count](https://img.shields.io/github/languages/count/Artprozew/BenchSyntaxLab?style=for-the-badge)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Artprozew/BenchSyntaxLab/workflow-tests.yaml?style=for-the-badge&label=TESTS)
+![GitHub License](https://img.shields.io/github/license/Artprozew/BenchSyntaxLab?style=for-the-badge&color=yellow)
+
+[![Static Badge](https://img.shields.io/badge/readme-pt--br-green)](https://github.com/Artprozew/BenchSyntaxLab/blob/main/README.pt-br.md)
 
 This is an experimental project that benchmarks the performance of several programming languages I've been actively using and studying lately. It also includes some rather interesting **supersets**, such as Cython (a "C-like" superset of Python).
 
