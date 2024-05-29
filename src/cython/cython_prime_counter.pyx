@@ -1,6 +1,6 @@
 import time
 
-DEF RUNS = 3
+DEF RUNS = 10
 DEF AMOUNT = 20000
 DEF PRIME_AMOUNT = True
 
@@ -29,7 +29,7 @@ def main() -> None:
         print("AMOUNT or RUNS must be greater than 0!")
         return
     
-    print("Prime Counting Benchmark")
+    print("Prime Counting Benchmark: Cython")
     cdef float total_time = 0, interval
     cdef int primes_found
 
@@ -42,7 +42,7 @@ def main() -> None:
 
     print(f"\nCounted {primes_found}"
     f"{'' if PRIME_AMOUNT else f' up to {AMOUNT}'}"
-    f" in {RUNS} with an average of {(total_time/ RUNS):.3f} seconds"
+    f" in {RUNS} runs with an average of {(total_time/ RUNS):.3f} seconds"
     )
 
 

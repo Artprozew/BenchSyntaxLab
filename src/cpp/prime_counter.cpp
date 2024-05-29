@@ -9,7 +9,7 @@ int main() {
         return 1;
     }
 
-    printf("Prime Counting Benchmark\n");
+    printf("Prime Counting Benchmark: C++\n");
     float total_time = 0;
     unsigned int primes = 0;
 

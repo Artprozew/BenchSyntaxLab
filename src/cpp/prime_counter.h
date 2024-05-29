@@ -3,7 +3,7 @@
 
 
 #ifndef RUNS
-    #define RUNS 3
+    #define RUNS 10
 #endif
 #ifndef AMOUNT
     #define AMOUNT 20000
