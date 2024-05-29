@@ -1,6 +1,10 @@
 # BenchSyntaxLab
 
-[![en](https://img.shields.io/badge/lang-en-blue
+![GitHub language count](https://img.shields.io/github/languages/count/Artprozew/BenchSyntaxLab?style=for-the-badge)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Artprozew/BenchSyntaxLab/workflow-tests.yaml?style=for-the-badge&label=TESTS)
+![GitHub License](https://img.shields.io/github/license/Artprozew/BenchSyntaxLab?style=for-the-badge&color=yellow)
+
+[![en](https://img.shields.io/badge/readme-en-blue
 )](https://github.com/Artprozew/BenchSyntaxLab/blob/main/README.md)
 
 Esse é um projeto experimental que avalia a performance de diversas linguagens de programação que eu tenho usado e estudado ativamente ultimamente. Ele também inclui alguns **superconjuntos** um tanto quanto interessantes, como o Cython (um superset Python "semelhante" ao C).
